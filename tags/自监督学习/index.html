@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://106224.github.io">
-  <title>junjianli</title>
+  <title>Tag: 自监督学习 | junjianli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="天行健君子以自强不息">
 <meta property="og:type" content="website">
 <meta property="og:title" content="junjianli">
-<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;tags&#x2F;%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0&#x2F;index.html">
 <meta property="og:site_name" content="junjianli">
 <meta property="og:description" content="天行健君子以自强不息">
 <meta property="og:locale" content="en_US">
@@ -185,63 +185,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey论文研读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/12/18/Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/" class="archive-article-date">
+  	<time datetime="2019-12-18T03:54:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/">Self-supervised Visual Feature Learning with Deep Neural Networks: A Survey论文研读</a>
+      <a class="archive-article-title" href="/2019/12/18/Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/">Self-supervised Visual Feature Learning with Deep Neural Networks: A Survey论文研读</a>
     </h1>
   
 
-        
-        <a href="/2019/12/18/Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/" class="archive-article-date">
-  	<time datetime="2019-12-18T03:54:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/asset/8.png" alt=""></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是一篇关于<strong>无监督学习</strong>的综述,里面主要就自监督学习进行了介绍.无监督学习研究的主要目标是<strong>预训练一个模型网络，供其他任务(downstream tasks)使用</strong>。在无监督方式中产生的通用的特征通常能够用到分类任务中：例如在 ImageNet 上训练会表现出很好的结果，这与监督模型非常接近。 迄今为止，监督模型总是比无监督的预训练模型表现的要好。其主要原因是监督模型对数据集的特性编码的更好。但如果模型运用到其他任务，监督工作是可以减少的。在这方面，希望达到的目标是<strong>无监督训练可以提供通用的特征，用于学习并实现其它任务(downstream tasks)。</strong></p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了在计算机视觉应用中从图像或视频中获得更好的视觉特征学习性能，通常需要大规模的标记数据来训练深度神经网络。为了避免大规模数据集收集和标注的大量开销.自监督学习作为无监督学习方法的一个子集，在不使用任何人类标注的标签的情况下，从大规模无标记数据中学习图像和视频的通用的特征。本文对基于深度学习的自监督通用视觉特征学习方法进行了广泛的综述。首先，描述了该领域的动机、通用流程(pipeline)和术语。在此基础上，总结了常用的用于自监督学习的深度神经网络体系结构。接下来，回顾了自监督学习方法的模式和评价指标，然后介绍了常用的图像和视频数据集以及现有的自监督视觉特征学习方法。最后，总结和讨论了基于基准数据集的定量性能比较方法在图像和视频特征学习中的应用。最后，对本文的研究进行了总结，并提出了一套具有发展前景的自监督视觉特征学习方法</p>
-<p><strong>索引词</strong>:自我监督学习,非监督学习,卷积神经网络,迁移学习,深度学习</p>
-<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><h3 id="1-1-动机-Motivation"><a href="#1-1-动机-Motivation" class="headerlink" title="1.1 动机(Motivation)"></a>1.1 动机(Motivation)</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;深度神经网络具有很强的学习不同层次通用视觉特征的能力，深度神经网络已被广泛应用于对象检测、[1]、[2]、[3]、语义分割、[4]、[5]、[6]、图像字幕[7]等计算机视觉应用中。从像ImageNet这样的大型图像数据集中训练出来的模型(这里指的是一般是训练的权重信息)被广泛地 用作预先训练的模型，并用于其他任务的微调(fine-tuning)，其主要原因有两个:(1)从大规模的参数不同的数据集提供了一个很好的起点,因此,网络训练其他任务可以收敛更快,(2)网络训练的大规模数据集已经学会了层次结构功能可以帮助减少在训练其他问题时候的过拟合问题,特别是当其他任务中的数据集的标签稀缺小的时候。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;深度卷积神经网络(ConvNets)的性能在很大程度上取决于其训练能力和训练数据量。为了提高网络模型的训练能力，人们开发了各种不同的网络结构，并收集了越来越多的数据集。各种网络，包括AlexNet [8]， VGG [9]， GoogLeNet [10]， ResNet[11]，和DenseNet[12]和大规模的数据集如ImageNet[13]、OpenImage[14],这些数据集已经被用于训练非常深的卷积神经网络.随着复杂而精细的卷积神经网络和大规模的数据集的应用，ConvNets的表现不断打破许多计算机视觉任务的最新的水平.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然而，大规模数据集的收集和注释既耗时又昂贵。ImageNet[13]是最广泛用于深度2D卷积神经网络(2DConvNets)预处理的数据集之一，它包含约130万张标记图像，覆盖1000个类，而每个图像都是人工标注的。与图像数据集相比，视频数据集的采集和标注由于时间维度的关系而更加昂贵。Kinetics动数据集[17]主要用于训练卷积神经网络进行视频人体动作识别，它包含600个类别的50万个视频，每个视频持续约10秒。Amazon Turk工作人员花费了大量时间来收集和注释如此大规模的数据集。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了避免耗时和昂贵的数据标注处理，人们提出了许多自监督方法(self-supervised)来学习大规模未标记图像或视频的视觉特征，不使用任何人工标注(无监督学习)。为了从未标记数据中学习视觉特征，一个流行的解决方案是提出各种借口任务(pretext task)让网络去解决，而网络可以通过学习借口任务(pretext task)的目标函数来训练，通过这个过程来学习特征。目前,已经提出了各种自监督学习的借口任务(pretext task)，包括给灰度图像着色[18]，图像修补[19]，图像拼图[20]等。借口任务(pretext task)有两个共同的属性:(1)卷积网络需要捕捉图像或视频的视觉特征来解决借口任务(pretext task)，(2)借口任务(pretext task)可以根据图像或视频的属性自动生成伪标签(pseudo labels).</p>
-<p> <img src="./Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey论文研读/convnet.png" alt=""></p>
-<p> <strong>图一:</strong> 自我监督学习的一般流程。视觉特征是通过训练卷积神经网络解决预先定义的借口任务(pretext task)所获得的。在完成自我监督学习的借口任务(pretext task)的训练后，将所学习的参数作为一个预先训练的模型，通过微调传递给其他下游计算机视觉任务(downstream tasks)。这些下游任务(downstream tasks)的表现用于评估在无监督学习中所学习特征的质量。在下游任务的知识转移过程中，只有前几层的特征被转移到下游任务.</p>
-<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自监督学习的一般流程如图1所示。在自监督训练阶段，设计了一个预先定义的借口任务用于卷积神经网络的训练，并根据数据的某些属性自动生成借口任务的伪标签。然后训练卷积神经网络学习借口任务的目标函数。在完成自我监督训练后，学习到的视觉特征可以进一步转移到下游任务(特别是当只有相对较小的数据可用时)作为预先训练的模型来提高性能和克服过拟合。通常，浅层捕获一般的低级特性，如边缘、角和纹理，而较深的层捕获与任务相关的高级特性。因此，在监督下的下游任务训练阶段，只传输前几层的视觉特征.</p>
-<h3 id="1-2-术语定义-Term-Definitio"><a href="#1-2-术语定义-Term-Definitio" class="headerlink" title="1.2 术语定义(Term Definitio)"></a>1.2 术语定义(Term Definitio)</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了使这个综述易于阅读，我们首先定义在综述中将会使用到的一些术语。</p>
-<ul>
-<li><strong>人类标注的标签</strong>:人工标注标签是指由人工标注的数据标签</li>
-<li><strong>伪标签(Pseudo label)</strong>:伪标签是根据借口任务(pretext task)的数据属性自动生成的标签</li>
-<li><strong>借口任务(Pretext Task)</strong>:借口任务是预先设计好的网络任务，通过学习借口任务的目标函数来学习视觉特征.</li>
-<li><strong>下游任务(Downstream Task)</strong>:下游任务是用于评估通过自监督学习获得的特征的质量。当训练数据缺乏时，这些任务可以从预先训练的模型中得到很大的好处。在一般情况下，<strong>需要使用人工标注的标签来解决下游的任务</strong>.但是，在某些应用程序中，下游任务可以与借口任务相同，而不使用任何人工注释的标签。</li>
-<li><strong>非监督学习(Unsupervised Learning)</strong>:无监督学习是指不使用任何人类标注的标签的学习方法</li>
-<li><strong>自监督学习(Self-supervised Learning)</strong>:自监督学习是无监督学习方法的一个子集。自监督学习是指使用自动生成的标签(伪标签)对卷积神经网络进行训练的一种学习方法。本文只讨论了基于卷积神经网络的视觉特征学习的自监督学习方法，该方法将特征转移到多个不同的计算机视觉任务中来检测无监督学习方法的好坏.</li>
-</ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于在自监督训练过程中不需要人工标注来生成伪标签，因此可以使用非常大的数据集进行自监督训练。通过这些伪标签的训练，自监督方法取得良好的效果，与监督方法相比下游任务中的性能差距变小。本文综述了基于深度卷积神经网络的自监督视觉特征学习方法。本文的主要贡献如下:</p>
-<ul>
-<li>据我们所知，这是第一次关于深度卷积自监督视觉特征学习的综合调查，对这一领域的研究有一定的帮助。</li>
-<li>最近开发的自我监督学习方法和数据集的深入审查。</li>
-<li>对现有方法进行了定量性能分析和比较。</li>
-<li>指出了自监督学习未来可能的发展方向。</li>
-</ul>
-<h2 id="2-不同学习模式的制定"><a href="#2-不同学习模式的制定" class="headerlink" title="2 .不同学习模式的制定"></a>2 .不同学习模式的制定</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于训练标签，视觉特征学习方法可以分为四类:监督、半监督、弱监督和非监督。在这一节中，比较了四种类型的学习方法，并定义了关键术语.</p>
-<h3 id="2-1-监督学习公式"><a href="#2-1-监督学习公式" class="headerlink" title="2.1 监督学习公式"></a>2.1 监督学习公式</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于监督学习,给定一个数据集X,对于X中的每一个样本X<sub>i</sub>都有一个与之唯一对于的Y<sub>i</sub>,</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -261,276 +232,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/18/Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-software-engine-homework" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/software-engine-homework/">software engine homework</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/17/software-engine-homework/" class="archive-article-date">
-  	<time datetime="2019-12-17T06:34:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="The-Ten-Most-Powerful-Principles-for-Quality-in-Software-and-Software-Organizations-for-Dependable-Systems"><a href="#The-Ten-Most-Powerful-Principles-for-Quality-in-Software-and-Software-Organizations-for-Dependable-Systems" class="headerlink" title="The Ten Most Powerful Principles for Quality in (Software and) Software Organizations for Dependable Systems"></a>The Ten Most Powerful Principles for Quality in (Software and) Software Organizations for Dependable Systems</h1><h1 id="可靠系统软件组织的十大质量原则"><a href="#可靠系统软件组织的十大质量原则" class="headerlink" title="可靠系统软件组织的十大质量原则"></a>可靠系统软件组织的十大质量原则</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>软件知道自己有问题。解决方案比比皆是，但是哪些解决方案有效呢？我们在成功的项目中可以遵守的最基本的基本原则是什么？这篇文章提出了10个没有被广泛传授的强有力的原则。它们基于测量、量化和反馈的思想。众所周知，我们在“数字”方面的成熟度很低。希望随着我们迈向更高的成熟度水平，我们也将开始意识到思想的度量和数字表达的力量。我们现在能做什么呢？我建议第一步是认识到你们所有的质量要求都可以而且应该用数字来规定。我不是在说“数虫子”。我说的是量化质量，如安全性、可移植性、适应性、可维护性、健壮性、可用性、可靠性和性能。决定在您的项目中将它们设置为数字。今天起草一些数字要求，明天给您的团队带来惊喜<br>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件工程</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">homework</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/17/software-engine-homework/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data论文研读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/">Unsupervised Pre-Training of Image Features on Non-Curated Data论文研读</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/17/Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/" class="archive-article-date">
-  	<time datetime="2019-12-17T00:59:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>目前大多数非监督的特征学习的数据集一般都是小且经过精挑细选的,比如说ImageNet,因为评估transfer task的时候使用non-curated的原数据会降低特征的质量.<br>这篇文章的目的就是去研究在non-curated的数据下的非监督学习的方式.针对这一问题，提出了一种新的无监督方法，即利用自监督和聚类的方法来获取大规模数据中的complementary statistics。我们对来自YFCC100M的9600万张图像进行了验证.在无监督的基准测试方法中取得state of art的效果.<br>我们还证明，用我们的方法训练一个监督的VGG-16(使用deepercluster得到的卷积层的权重进行对网络进行初始化)，在imagenet的验证集上达到了74.9%的top-1的分类精度，比从头开始训练的网络(vgg-16)提高了+0.8%。<br>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度聚类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/17/Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/" class="archive-article-date">
-  	<time datetime="2019-12-17T00:18:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>论文地址：<a href="https://arxiv.org/abs/1805.01978" target="_blank" rel="noopener">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</a><br>github代码:<a href="https://github.com/zhirongw/lemniscate.pytorch" target="_blank" rel="noopener">NCE代码</a></p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h2><p>在有标签数据上训练的神经网络分类器能够很好的捕捉图片间的视觉相似性。文章假设：我们能通过训练基于实例（将每一个样本视为单独的类别）的分类器代替基于类别的分类器，得到可以捕捉视觉相似性的特征表达。我们将其总结为<strong>非参数化实例级判别</strong>，并且通过<strong>噪声对比估计（noise-contrastive estimation）</strong>解决大量实例类别引起的计算困难。<br>我们的实验证明了，在无监督学习的限制下，我们的方法在ImageNet数据集上超越了当前最好方法。采用更多的训练数据和更先进的网络结构，我们的方法能够进一步提高分类准确率。通过微调学习到的特征，我们能观察到与半监督学习和目标检测任务上相当的结果。同时，我们的非参数化模型十分紧致：每张图片仅需要提取128维的特征，百万量级的图片也仅需要600MB存储空间，使得实际运行时能够很快达成近邻检索的目的。<br>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -552,10 +266,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
