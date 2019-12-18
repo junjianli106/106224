@@ -34,6 +34,7 @@
 
   
 
+  <link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 <meta name="generator" content="Hexo 4.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
@@ -266,7 +267,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="The-Ten-Most-Powerful-Principles-for-Quality-in-Software-and-Software-Organizations-for-Dependable-Systems"><a href="#The-Ten-Most-Powerful-Principles-for-Quality-in-Software-and-Software-Organizations-for-Dependable-Systems" class="headerlink" title="The Ten Most Powerful Principles for Quality in (Software and) Software Organizations for Dependable Systems"></a>The Ten Most Powerful Principles for Quality in (Software and) Software Organizations for Dependable Systems</h1><h1 id="可靠系统软件组织的十大质量原则"><a href="#可靠系统软件组织的十大质量原则" class="headerlink" title="可靠系统软件组织的十大质量原则"></a>可靠系统软件组织的十大质量原则</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>软件知道自己有问题。解决方案比比皆是，但是哪些解决方案有效呢？我们在成功的项目中可以遵守的最基本的基本原则是什么？这篇文章提出了10个没有被广泛传授的强有力的原则。它们基于测量、量化和反馈的思想。众所周知，我们在“数字”方面的成熟度很低。希望随着我们迈向更高的成熟度水平，我们也将开始意识到思想的度量和数字表达的力量。我们现在能做什么呢？我建议第一步是认识到你们所有的质量要求都可以而且应该用数字来规定。我不是在说“数虫子”。我说的是量化质量，如安全性、可移植性、适应性、可维护性、健壮性、可用性、可靠性和性能。决定在您的项目中将它们设置为数字。今天起草一些数字要求，明天给您的团队带来惊喜<br>
+        <p>#The Ten Most Powerful Principles for Quality in (Software and) Software Organizations for Dependable Systems<br />
+#可靠系统软件组织的十大质量原则</p>
+<p>##摘要</p>
+<p>软件知道自己有问题。解决方案比比皆是，但是哪些解决方案有效呢？我们在成功的项目中可以遵守的最基本的基本原则是什么？这篇文章提出了10个没有被广泛传授的强有力的原则。它们基于测量、量化和反馈的思想。众所周知，我们在“数字”方面的成熟度很低。希望随着我们迈向更高的成熟度水平，我们也将开始意识到思想的度量和数字表达的力量。我们现在能做什么呢？我建议第一步是认识到你们所有的质量要求都可以而且应该用数字来规定。我不是在说“数虫子”。我说的是量化质量，如安全性、可移植性、适应性、可维护性、健壮性、可用性、可靠性和性能。决定在您的项目中将它们设置为数字。今天起草一些数字要求，明天给您的团队带来惊喜</p>
         
       
 
@@ -344,7 +348,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>目前大多数非监督的特征学习的数据集一般都是小且经过精挑细选的,比如说ImageNet,因为评估transfer task的时候使用non-curated的原数据会降低特征的质量.<br>这篇文章的目的就是去研究在non-curated的数据下的非监督学习的方式.针对这一问题，提出了一种新的无监督方法，即利用自监督和聚类的方法来获取大规模数据中的complementary statistics。我们对来自YFCC100M的9600万张图像进行了验证.在无监督的基准测试方法中取得state of art的效果.<br>我们还证明，用我们的方法训练一个监督的VGG-16(使用deepercluster得到的卷积层的权重进行对网络进行初始化)，在imagenet的验证集上达到了74.9%的top-1的分类精度，比从头开始训练的网络(vgg-16)提高了+0.8%。<br>
+        <h2 id="abstract"><a class="markdownIt-Anchor" href="#abstract"></a> Abstract</h2>
+<p>目前大多数非监督的特征学习的数据集一般都是小且经过精挑细选的,比如说ImageNet,因为评估transfer task的时候使用non-curated的原数据会降低特征的质量.<br />
+这篇文章的目的就是去研究在non-curated的数据下的非监督学习的方式.针对这一问题，提出了一种新的无监督方法，即利用自监督和聚类的方法来获取大规模数据中的complementary statistics。我们对来自YFCC100M的9600万张图像进行了验证.在无监督的基准测试方法中取得state of art的效果.<br />
+我们还证明，用我们的方法训练一个监督的VGG-16(使用deepercluster得到的卷积层的权重进行对网络进行初始化)，在imagenet的验证集上达到了74.9%的top-1的分类精度，比从头开始训练的网络(vgg-16)提高了+0.8%。</p>
         
       
 
@@ -422,8 +429,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>论文地址：<a href="https://arxiv.org/abs/1805.01978" target="_blank" rel="noopener">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</a><br>github代码:<a href="https://github.com/zhirongw/lemniscate.pytorch" target="_blank" rel="noopener">NCE代码</a></p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h2><p>在有标签数据上训练的神经网络分类器能够很好的捕捉图片间的视觉相似性。文章假设：我们能通过训练基于实例（将每一个样本视为单独的类别）的分类器代替基于类别的分类器，得到可以捕捉视觉相似性的特征表达。我们将其总结为<strong>非参数化实例级判别</strong>，并且通过<strong>噪声对比估计（noise-contrastive estimation）</strong>解决大量实例类别引起的计算困难。<br>我们的实验证明了，在无监督学习的限制下，我们的方法在ImageNet数据集上超越了当前最好方法。采用更多的训练数据和更先进的网络结构，我们的方法能够进一步提高分类准确率。通过微调学习到的特征，我们能观察到与半监督学习和目标检测任务上相当的结果。同时，我们的非参数化模型十分紧致：每张图片仅需要提取128维的特征，百万量级的图片也仅需要600MB存储空间，使得实际运行时能够很快达成近邻检索的目的。<br>
+        <p>论文地址：<a href="https://arxiv.org/abs/1805.01978" target="_blank" rel="noopener">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</a><br />
+github代码:<a href="https://github.com/zhirongw/lemniscate.pytorch" target="_blank" rel="noopener">NCE代码</a></p>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要:</h2>
+<p>在有标签数据上训练的神经网络分类器能够很好的捕捉图片间的视觉相似性。文章假设：我们能通过训练基于实例（将每一个样本视为单独的类别）的分类器代替基于类别的分类器，得到可以捕捉视觉相似性的特征表达。我们将其总结为<strong>非参数化实例级判别</strong>，并且通过**噪声对比估计（noise-contrastive estimation）**解决大量实例类别引起的计算困难。<br />
+我们的实验证明了，在无监督学习的限制下，我们的方法在ImageNet数据集上超越了当前最好方法。采用更多的训练数据和更先进的网络结构，我们的方法能够进一步提高分类准确率。通过微调学习到的特征，我们能观察到与半监督学习和目标检测任务上相当的结果。同时，我们的非参数化模型十分紧致：每张图片仅需要提取128维的特征，百万量级的图片也仅需要600MB存储空间，使得实际运行时能够很快达成近邻检索的目的。</p>
         
       
 
