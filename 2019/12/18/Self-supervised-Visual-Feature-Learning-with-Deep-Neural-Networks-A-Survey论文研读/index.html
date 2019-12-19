@@ -17,8 +17,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;2019&#x2F;12&#x2F;18&#x2F;Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB&#x2F;Self-supervised-Visual-Feature-Learning-with-Deep-Neural-Networks-A-Survey论文研读&#x2F;flower.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;convnet.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;8.png">
 <meta property="article:published_time" content="2019-12-18T03:54:35.000Z">
-<meta property="article:modified_time" content="2019-12-19T03:42:42.803Z">
+<meta property="article:modified_time" content="2019-12-19T03:56:28.841Z">
 <meta property="article:author" content="junjian">
 <meta property="article:tag" content="非监督学习">
 <meta property="article:tag" content="综述">
@@ -240,6 +241,9 @@
 <h3 id="2-2-自监督学习"><a href="#2-2-自监督学习" class="headerlink" title="2.2 自监督学习"></a>2.2 自监督学习</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近年来，许多用于视觉特征学习的自监督学习方法被提出来，这些学习方法没有使用任何人类标注的标签[23]，[24]，[25]，[26]，[27]，[28]，[29，[30]，[31]，[32]，[33]，[33]，[34]，[35]。一些论文将这种学习方法称为无监督学习[36]，[37], [38], [39], [40], [41], [42], [43], [44], [45], [46], [47], [48].与需要数据标注的监督学习方法相比,自监督学习使用数据X<sub>i</sub>和pretext task任务生成的伪标签P<sub>i</sub>来训练。可以使用图像或视频的属性,如图像的上下文[18]，[19，[20]，[36]来生成伪标签，也可以使用传统的手工设计方法[49]，[50]，[51]来生成伪标签P<sub>i</sub>。给定一组N个训练数据$D=\left\{P_{i}\right\}_{i=0}^{N}$，将训练oss函数定义为:</p>
 <script type="math/tex; mode=display">
 \operatorname{loss}(D)=\min _{\theta} \frac{1}{N} \sum_{i=1}^{N} \operatorname{loss}\left(X_{i}, P_{i}\right)</script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只要在不涉及人工标注的情况下自动生成的伪标签P<sub>i</sub>,就属于自监督学习.近年来,自监督学习方法取得了很大的进展.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文研究的是基于视觉特征学习的自监督学习方法,这种学习方法主要是针对视觉特征的学习而设计的,而这些特征具有从有限的标记数据中学习并转移到多个视觉任务和执行新任务的能力.本文从网路结构,常用的借口任务,数据集,应用等方面综述了自监督特征学习方法.</p>
+<h2 id="3-常见的深度网络框架"><a href="#3-常见的深度网络框架" class="headerlink" title="3 常见的深度网络框架"></a>3 常见的深度网络框架</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论哪一种自监督学习方法,他们在都使用相似的深度网络结构,本文回顾学习图像和视频的常见架构.</p>
+<h3 id="3-1图像特征学习的架构"><a href="#3-1图像特征学习的架构" class="headerlink" title="3.1图像特征学习的架构"></a>3.1图像特征学习的架构</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论哪一种自监督学习方法,他们在都使用相似的深度网络结构,本文回顾学习图像和视频的常见架构.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;针对图像特征学习设计了多种2D卷积神经网络。在这里，我们回顾了图像特征学习的5个里程碑架构，包括AlexNet[8]、VGG[9]、GoogLeNet[10]、ResNet[11]和DenseNet [12].</p>
+<h4 id="3-1-1-AlexNet"><a href="#3-1-1-AlexNet" class="headerlink" title="3.1.1 AlexNet"></a>3.1.1 AlexNet</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AlexNet在ImageNet数据集上的图像分类性能与以往最先进的方法[8]相比有了很大的提高。在强大的gpu支持下，拥有6240万参数的AlexNet在ImageNet上进行了130万张图像的训练。如图2所示，AlexNet架构共有8层，其中5层为卷积层，3层为全连接层。ReLU在每个卷积层之后应用。94%的网络参数来自于完全连接的层。有了这种比例的参数，网络很容易被过度拟合。因此，采用不同的技术来避免过拟合问题，包括数据增强、Dropout和数据归一化。<br><img src="/asset/8.png" alt=""></p>
 
       
 
@@ -360,7 +364,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘要"><span class="toc-number">1.</span> <span class="toc-text">摘要:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-介绍"><span class="toc-number">2.</span> <span class="toc-text">1.介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-动机-Motivation"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 动机(Motivation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-术语定义-Term-Definitio"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 术语定义(Term Definitio)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-不同学习模式的制定"><span class="toc-number">3.</span> <span class="toc-text">2 .不同学习模式的制定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-监督学习公式"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 监督学习公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-自监督学习"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 自监督学习</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘要"><span class="toc-number">1.</span> <span class="toc-text">摘要:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-介绍"><span class="toc-number">2.</span> <span class="toc-text">1.介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-动机-Motivation"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 动机(Motivation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-术语定义-Term-Definitio"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 术语定义(Term Definitio)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-不同学习模式的制定"><span class="toc-number">3.</span> <span class="toc-text">2 .不同学习模式的制定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-监督学习公式"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 监督学习公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-自监督学习"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 自监督学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-常见的深度网络框架"><span class="toc-number">4.</span> <span class="toc-text">3 常见的深度网络框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1图像特征学习的架构"><span class="toc-number">4.1.</span> <span class="toc-text">3.1图像特征学习的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-AlexNet"><span class="toc-number">4.1.1.</span> <span class="toc-text">3.1.1 AlexNet</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -494,15 +498,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">非监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度聚类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,6 +507,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">自监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度聚类</a>
               </li>
              
               <li class="article-tag-list-item">
