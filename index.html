@@ -184,6 +184,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Deep-Clustering-for-Unsupervised-Learning-of-Visual-Features" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/24/Deep-Clustering-for-Unsupervised-Learning-of-Visual-Features/">Deep Clustering for Unsupervised Learning of Visual Features</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/24/Deep-Clustering-for-Unsupervised-Learning-of-Visual-Features/" class="archive-article-date">
+  	<time datetime="2019-12-24T14:24:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>论文地址：<a href="https://arxiv.org/abs/1807.05520" target="_blank" rel="noopener">Deep Clustering for Unsupervised Learning of Visual Features</a><br>github代码:<a href="https://github.com/facebookresearch/deepcluster" target="_blank" rel="noopener">DeepCluster代码</a></p>
+<h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h2><p>聚类是一种在计算机视觉被广泛应用和研究的无监督学习方法，但几乎未在大规模数据集上的视觉特征端到端训练中被采用过。在本文中，我们提出了深度聚类（DeepCluster），这是一种联合学习神经网络参数和获取特征的聚类分配的聚类方法。深度聚类使用标准的聚类算法 k-means 对特征进行迭代分组，随后使用赋值作为监督来更新网络的权重。我们将深度聚类应用于 ImageNet 和 YFCC100M 这样的大型数据集上的卷积神经网络的无监督训练。最终模型在所有基准性能中都远远优于目前的技术。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>聚类是一种在计算机视觉被广泛应用和研究的无监督学习方法，但几乎未在大规模数据集上的视觉特征端到端训练中被采用过。在本文中，Facebook AI 研究院提出了深度聚类（DeepCluster），一种联合学习神经网络参数和获取特征的聚类分配的聚类方法。在 ImageNet 和 YFCC100M 等典型规模数据集上的卷积神经网络的无监督训练的实验结果表明，该方法在所有基准性能中都远远优于目前的技术。</p>
+<p>预训练的卷积神经网络，或称卷积网络，已经成为大多数计算机视觉应用的基础构建模块 [1,2,3,4]。它们能提取极好的通用特征，用来提高在有限数据上学习的模型的泛化能力 [5]。大型全监督数据集 ImageNet[6] 的建立促进了卷积网络的预训练的进展。然而，Stock 和 Cisse [7] 最近提出的经验证据表明，在 ImageNet 上表现最优的分类器的性能在很大程度上被低估了，而且几乎没有遗留错误问题。这在一定程度上解释了为什么尽管近年来出现了大量新架构，但性能仍然饱和 [2,8,9]。事实上，按照今天的标准，ImageNet 是相对较小的；它”仅仅”包含了一百万张涵盖各个领域的分类图片。所以建立一个更大更多样化，甚至包含数十亿图片的数据集是顺理成章的。而这也将需要大量的手工标注，尽管社区多年来积累了丰富的众包专家知识 [10]，但通过原始的元数据代替标签会导致视觉表征的偏差，从而产生无法预测的后果 [11]。这就需要在无监督的情况下对互联网级别的数据集进行训练的方法。</p>
+<p>无监督学习在机器学习社区 [12] 中得到了广泛的研究，在计算机视觉应用中也经常使用聚类、降维或密度估计算法 [13,14,15]。例如，”特征包”模型使用手工标注的描述符的聚类来生成良好的图像级特征 [16]。它们取得成功的一个关键原因是，它们可以应用于任何特定的领域或数据集，如卫星或医学图像，或使用一种新的模态 (如物体深度) 获取的图像，在这种模式下，无法获得大量的标注。有几项研究表明，可以将基于密度估计或降维的无监督方法应用到深度模型中 [17,18]，从而产生良好的通用视觉特征 [19,20]。尽管聚类方法在图像分类方面取得了初步的成功，但很少有人提出将其用于对卷积网络进行端到端训练 [21,22]，而且未成规模。问题是，聚类方法主要是为固定特征的线性模型设计的，如果必须同时学习特征，那么它们几乎不起作用。例如，使用 k-means 学习一个卷积网络将得到零特征的平凡解，并且聚类会坍缩成单个实体。</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>在本文中，FAIR 的研究者提出了一种为卷积网络进行大规模端到端训练的聚类方法。他们证明了用聚类框架获得有用的通用视觉特征是可实现的。该方法如图 1 所示，是在图像描述符的聚类和通过预测聚类分配来更新卷积网络的权值之间进行交替。简单起见，我们将研究重点放在 k-means 上，但其他聚类方法也适用，比如幂迭代聚类 (PIC)[23]。整个过程重用许多常见的技巧，与卷积网络的标准监督训练十分相似 [24]。与自监督方法 [25,26,27] 不同，聚类的优点是不需要太多专业知识，也不需要输入特定信号 [28,29]。尽管此方法很简单，但它在 ImageNet 分类和迁移任务上都比以前提出的非监督方法有更好的表现。<br><img src="/asset/deepcluster.png" alt=""><br>图 1：本文提出方法的图示：对深层特征进行迭代地聚类，并使用聚类赋值作为伪标签来学习卷积网络的参数。<br>最后，通过修改实验方案，特别是训练集和卷积网络的结构，研究者对框架的鲁棒性进行了探究。得到的实验集对 Doersch 等人 [25] 的讨论做了扩展，即关于这些选择对无监督方法性能的影响。他们证明了本文的方法使架构更具鲁棒性。用 VGG[30] 代替 AlexNet 可以显著提高特征质量和迁移性能。更重要的是，他们讨论使用 ImageNet 作为非监督模型的训练集。虽然它有助于理解标签对网络性能的影响，但是 ImageNet 有一个基于细粒度图像分类挑战的特定图像分布集：它由均衡的类组成，例如包含各类犬种。作为替代方案，可以从 Thomee 等人的 YFCC100M 数据集中选择随机的 Flickr 图片 [31]。他们的方法在对这种未确定的数据分布进行训练时有当前最佳的性能。最后，目前的基准测试侧重于无监督卷积网络捕捉类级信息的能力。研究者还建议在图像检索基准上对它们进行评估，以测量它们捕捉实例级信息的能力。</p>
+<p>在本文中，研究者做出了以下贡献：</p>
+<ul>
+<li>提出一种新的无监督方法来实现卷积网络的端到端学习，这种方法可以使用任何标准的聚类算法，比如 k-means，并且只需要很少的额外步骤；</li>
+<li>在使用无监督学习的许多标准迁移任务中达到当前最佳水平；</li>
+<li>对未处理的图像分布进行训练时，表现优于先前的最先进技术水平；</li>
+<li>讨论了无监督特征学习中的目前评估方案。</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在初步的实验中，研究团队研究了深度聚类在训练过程中的行为。然后，在标准基准上将其方法与之前最先进的模型进行比较之前，并对深度聚类学习的滤波器进行了定性评估。<br><img src="/asset/22.png" alt=""><br>图三:在原始RGB图像或者sobel滤波之后,在无监督的ImageNet上训练的AlexNet的第一层滤波器的卷积结果.<br><img src="/asset/23.png" alt=""><br>图四:更深的卷积层似乎捕获了更大量的纹理结构。然而，如图5第二行所示，最后一层的一些过滤器似乎简单地复制早已在之前层捕获的纹理。这恰恰证实了Zhang等人的发现：卷积层3和4的特征比来自卷积层5的特征更具辨别性。</p>
+<p><img src="/asset/24.png" alt=""><br>图5:显示了一些conv5的过滤器的前9张激活图是语义相关的。这第一排的过滤器包含于目标类别高度一致的结构信息。第二排的过滤器则更关注于风格。</p>
+<p><strong>激活值的线性分类</strong><br><img src="/asset/25.png" alt=""><br>表 1：使用 AlexNet 的卷积层的激活值作为特征的 ImageNet 和 Places 上的线性分类。报告的分类准确率平均超过 10 种作物。其他方法的数字来自 Zhang et al[43]。</p>
+<p><strong>Pascal VOC 2007</strong><br><img src="/asset/26.png" alt=""><br>表 2：对 Pascal VOC 的分类、检测和分割的最新无监督特征学习方法的比较。∗表明 Krahenbuhl 等人使用数据依赖初始化 [68]。其他方法产生的数字被标记为 a †。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">无监督学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自监督学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/24/Deep-Clustering-for-Unsupervised-Learning-of-Visual-Features/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-自监督学习综述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -219,15 +313,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自监督学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">综述</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自监督学习</a>
         		</li>
       		
 		</ul>
@@ -302,15 +396,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自监督学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">综述</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自监督学习</a>
         		</li>
       		
 		</ul>
@@ -541,11 +635,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
         		</li>
       		
 		</ul>
@@ -700,11 +794,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">非监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">综述</a>
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,6 +803,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">非监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">综述</a>
               </li>
              
               <li class="article-tag-list-item">
