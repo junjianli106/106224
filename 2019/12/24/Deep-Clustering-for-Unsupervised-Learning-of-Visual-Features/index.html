@@ -22,7 +22,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;25.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;26.png">
 <meta property="article:published_time" content="2019-12-24T14:24:22.000Z">
-<meta property="article:modified_time" content="2019-12-24T14:39:00.723Z">
+<meta property="article:modified_time" content="2019-12-25T00:09:41.181Z">
 <meta property="article:author" content="junjian">
 <meta property="article:tag" content="无监督学习">
 <meta property="article:tag" content="自监督学习">
@@ -214,7 +214,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>论文地址：<a href="https://arxiv.org/abs/1807.05520" target="_blank" rel="noopener">Deep Clustering for Unsupervised Learning of Visual Features</a><br>github代码:<a href="https://github.com/facebookresearch/deepcluster" target="_blank" rel="noopener">DeepCluster代码</a></p>
-<h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h2><p>聚类是一种在计算机视觉被广泛应用和研究的无监督学习方法，但几乎未在大规模数据集上的视觉特征端到端训练中被采用过。在本文中，我们提出了深度聚类（DeepCluster），这是一种联合学习神经网络参数和获取特征的聚类分配的聚类方法。深度聚类使用标准的聚类算法 k-means 对特征进行迭代分组，随后使用赋值作为监督来更新网络的权重。我们将深度聚类应用于 ImageNet 和 YFCC100M 这样的大型数据集上的卷积神经网络的无监督训练。最终模型在所有基准性能中都远远优于目前的技术。</p>
+<h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h2><p>聚类是一种在计算机视觉被广泛应用和研究的无监督学习方法，但几乎未在大规模数据集上的视觉特征端到端训练中被采用过。在本文中，我们提出了深度聚类（DeepCluster），这是一种联合学习神经网络参数和获取特征的聚类分配的聚类方法。深度聚类使用标准的聚类算法 k-means 对特征进行迭代分组，随后使用赋值作为监督来更新网络的权重。我们将深度聚类应用于 ImageNet 和 YFCC100M 这样的大型数据集上的卷积神经网络的无监督训练。最终模型在所有基准性能中都远远优于目前的技术。<br><a id="more"></a></p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>聚类是一种在计算机视觉被广泛应用和研究的无监督学习方法，但几乎未在大规模数据集上的视觉特征端到端训练中被采用过。在本文中，Facebook AI 研究院提出了深度聚类（DeepCluster），一种联合学习神经网络参数和获取特征的聚类分配的聚类方法。在 ImageNet 和 YFCC100M 等典型规模数据集上的卷积神经网络的无监督训练的实验结果表明，该方法在所有基准性能中都远远优于目前的技术。</p>
 <p>预训练的卷积神经网络，或称卷积网络，已经成为大多数计算机视觉应用的基础构建模块 [1,2,3,4]。它们能提取极好的通用特征，用来提高在有限数据上学习的模型的泛化能力 [5]。大型全监督数据集 ImageNet[6] 的建立促进了卷积网络的预训练的进展。然而，Stock 和 Cisse [7] 最近提出的经验证据表明，在 ImageNet 上表现最优的分类器的性能在很大程度上被低估了，而且几乎没有遗留错误问题。这在一定程度上解释了为什么尽管近年来出现了大量新架构，但性能仍然饱和 [2,8,9]。事实上，按照今天的标准，ImageNet 是相对较小的；它”仅仅”包含了一百万张涵盖各个领域的分类图片。所以建立一个更大更多样化，甚至包含数十亿图片的数据集是顺理成章的。而这也将需要大量的手工标注，尽管社区多年来积累了丰富的众包专家知识 [10]，但通过原始的元数据代替标签会导致视觉表征的偏差，从而产生无法预测的后果 [11]。这就需要在无监督的情况下对互联网级别的数据集进行训练的方法。</p>
 <p>无监督学习在机器学习社区 [12] 中得到了广泛的研究，在计算机视觉应用中也经常使用聚类、降维或密度估计算法 [13,14,15]。例如，”特征包”模型使用手工标注的描述符的聚类来生成良好的图像级特征 [16]。它们取得成功的一个关键原因是，它们可以应用于任何特定的领域或数据集，如卫星或医学图像，或使用一种新的模态 (如物体深度) 获取的图像，在这种模式下，无法获得大量的标注。有几项研究表明，可以将基于密度估计或降维的无监督方法应用到深度模型中 [17,18]，从而产生良好的通用视觉特征 [19,20]。尽管聚类方法在图像分类方面取得了初步的成功，但很少有人提出将其用于对卷积网络进行端到端训练 [21,22]，而且未成规模。问题是，聚类方法主要是为固定特征的线性模型设计的，如果必须同时学习特征，那么它们几乎不起作用。例如，使用 k-means 学习一个卷积网络将得到零特征的平凡解，并且聚类会坍缩成单个实体。</p>
@@ -480,19 +480,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">非监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自监督学习</a>
               </li>
              
               <li class="article-tag-list-item">
