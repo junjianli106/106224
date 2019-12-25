@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://106224.github.io">
-  <title>PyTorch 学习笔记 | junjianli</title>
+  <title>Tag: PYTORCH | junjianli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1：准确度的计算1.1 topk()相关">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PyTorch 学习笔记">
-<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;2019&#x2F;12&#x2F;25&#x2F;PyTorch-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;index.html">
+  <meta name="description" content="宠辱不惊，闲看庭前花开花落。去留无意，漫随天外云卷云舒。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="junjianli">
+<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;tags&#x2F;PYTORCH&#x2F;index.html">
 <meta property="og:site_name" content="junjianli">
-<meta property="og:description" content="1：准确度的计算1.1 topk()相关">
+<meta property="og:description" content="宠辱不惊，闲看庭前花开花落。去留无意，漫随天外云卷云舒。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-12-25T05:20:22.000Z">
-<meta property="article:modified_time" content="2019-12-25T06:23:19.153Z">
 <meta property="article:author" content="junjian">
-<meta property="article:tag" content="PYTORCH">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="junjianli" type="application/atom+xml">
@@ -185,58 +182,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-PyTorch-学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      PyTorch 学习笔记
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/12/25/PyTorch-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2019-12-25T05:20:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/12/25/PyTorch-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">PyTorch 学习笔记</a>
     </h1>
   
 
-        
-        <a href="/2019/12/25/PyTorch-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2019-12-25T05:20:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1：准确度的计算"><a href="#1：准确度的计算" class="headerlink" title="1：准确度的计算"></a>1：准确度的计算</h1><h2 id="1-1-topk-相关"><a href="#1-1-topk-相关" class="headerlink" title="1.1 topk()相关"></a>1.1 topk()相关</h2><a id="more"></a>
-<p>对于 <a href="https://pytorch.org/docs/stable/torch.html?highlight=topk#torch.topk" target="_blank" rel="noopener">topk()</a><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.topk(input, k, dim=None, largest=True, sorted=True, out=None) -&gt; (Tensor, LongTensor)</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>沿给定dim维度返回输入张量input中 k 个最大值。</li>
-<li>如果不指定dim，则默认为input的最后一维。</li>
-<li><p>如果为largest为 False ，则返回最小的 k 个值。</p>
-</li>
-<li><p>返回一个元组 (values,indices)，其中indices是原始输入张量input中测元素下标。</p>
-</li>
-<li>如果设定布尔值sorted 为_True_，将会确保返回的 k 个值被排序。<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">参数:</span></span><br></pre></td></tr></table></figure></li>
-<li>input (Tensor) – 输入张量</li>
-<li>dim (int, optional) – 排序的维</li>
-<li>largest (bool, optional) – 布尔值，控制返回最大或最小值</li>
-<li>sorted (bool, optional) – 布尔值，控制返回值是否排序</li>
-<li>out (tuple, optional) – 可选输出张量 (Tensor, LongTensor) output buffer<br>示例:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">output = torch.tensor([[<span class="number">-5.4783</span>, <span class="number">0.2298</span>],</span><br><span class="line">                           [<span class="number">-4.2573</span>, <span class="number">-0.4794</span>],</span><br><span class="line">                           [<span class="number">-0.1070</span>, <span class="number">-5.1511</span>],</span><br><span class="line">                           [<span class="number">-0.1785</span>, <span class="number">-4.3339</span>]])</span><br><span class="line">maxk = max((<span class="number">1</span>,))  <span class="comment"># 取top1准确率，若取top1和top5准确率改为max((1,5))</span></span><br><span class="line">_, pred = output.topk(maxk, <span class="number">1</span>, <span class="literal">True</span>, <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-输出结果如下:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_</span><br><span class="line">tensor([[ <span class="number">0.2298</span>],</span><br><span class="line">        [<span class="number">-0.4794</span>],</span><br><span class="line">        [<span class="number">-0.1070</span>],</span><br><span class="line">        [<span class="number">-0.1785</span>]])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pred</span><br><span class="line">tensor([[<span class="number">1</span>],</span><br><span class="line">        [<span class="number">1</span>],</span><br><span class="line">        [<span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>]])</span><br></pre></td></tr></table></figure>
-topk参数中，maxk取得是top1准确率，dim=1是按行取值， largest=1是取最大值</li>
-</ul>
-<h2 id="1-2-计算准确率"><a href="#1-2-计算准确率" class="headerlink" title="1.2 计算准确率"></a>1.2 计算准确率</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accuracy</span><span class="params">(output, target, topk=<span class="params">(<span class="number">1</span>,<span class="number">5</span>)</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Computes the precision@k for the specified values of k</span></span><br><span class="line"><span class="string">    prec1, prec5 = accuracy(output.data, target, topk=(1, 5))</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    maxk = max(topk)</span><br><span class="line">    <span class="comment"># print(maxk)</span></span><br><span class="line">    <span class="comment"># size函数：总元素的个数</span></span><br><span class="line">    batch_size = target.size(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># topk函数选取output前k大个数,这里的_是值,pred是索引.</span></span><br><span class="line">    _, pred = output.topk(maxk, <span class="number">1</span>, <span class="literal">True</span>, <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    pred = pred.t()</span><br><span class="line">    correct = pred.eq(target.view(<span class="number">1</span>, <span class="number">-1</span>).expand_as(pred))   </span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> topk:</span><br><span class="line">        correct_k = correct[:k].view(<span class="number">-1</span>).float().sum(<span class="number">0</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        res.append(correct_k.mul_(<span class="number">100.0</span> / batch_size))</span><br></pre></td></tr></table></figure>
-<p>以top5，batch_size = 64为例：</p>
-<p>1.topk()的使用：获取output中最大的5个数，如对第一张图片的output为[0.03,0.05,0.04,0.1…….(共1000个)]，经过topk()后得到的_是[0.2,0.19,0.18,0.17,0.16]，pred分别是其索引,共64张图片，可理解为一个64<em>5 的矩阵(其实是Tensor),然后在pred.t()求转置,变成5</em>64的矩阵,每一列的数即为该张图片的索引。(_是top1的值，pred是最大值的索引（size=4*1），一般会进行转置处理同真实值对比)</p>
-<p>2.target为64个值，代表每张图片所属的类别，经过target.view()后变成[1,2,3,4,5,6,7…..]，再经过expand_as(pred)，该函数代表将target.view()扩展到跟pred相同的维度，可理解为5 X 64的矩阵，每一列的值都相同。</p>
-<p>3.经过torch.eq()后，correct为一个5X64的矩阵，每一列仅有一个值为1，如第一列[0,0,1,0,0]，代表top1错误，top3正确，每一行代表top-k的值，在for循环中，可自由选择k的值，当K的值为4时，取correct前4行，通过.float().sum()操作，计算top4中1的总个数，除以batch_size，则能得到top4的准确率。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -248,119 +223,19 @@ topk参数中，maxk取得是top1准确率，dim=1是按行取值， largest=1�
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://106224.github.io/2019/12/25/PyTorch-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2019/12/24/Deep-Clustering-for-Unsupervised-Learning-of-Visual-Features/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Deep Clustering for Unsupervised Learning of Visual Features</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1：准确度的计算"><span class="toc-number">1.</span> <span class="toc-text">1：准确度的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-topk-相关"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 topk()相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-计算准确率"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 计算准确率</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -383,9 +258,9 @@ topk参数中，maxk取得是top1准确率，dim=1是按行取值， largest=1�
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
