@@ -6,29 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://106224.github.io">
-  <title>Unsupervised Pre-Training of Image Features on Non-Curated Data论文研读 | junjianli</title>
+  <title>如何处理非平衡数据 | junjianli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Abstract目前大多数非监督的特征学习的数据集一般都是小且经过精挑细选的,比如说ImageNet,因为评估transfer task的时候使用non-curated的原数据会降低特征的质量.这篇文章的目的就是去研究在non-curated的数据下的非监督学习的方式.针对这一问题，提出了一种新的无监督方法，即利用自监督和聚类的方法来获取大规模数据中的complementary statistic">
+  <meta name="description" content="背景 数据和特征决定了机器学习的上限，模型和算法只是不断逼近这个上限。 不平衡程度相同（即正负样本比例类似）的两个问题，解决的难易程度也可能不同，因为问题难易程度还取决于我们所拥有数据有多大。比如在预测微博互动数的问题中，虽然数据不平衡，但每个档位的数据量都很大——最少的类别也有几万个样本，这样的问题通常比较容易解决；而在癌症诊断的场景中，因为患癌症的人本来就很少，所以数据不但不平衡，样本数还非常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unsupervised Pre-Training of Image Features on Non-Curated Data论文研读">
-<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;2019&#x2F;12&#x2F;17&#x2F;Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB&#x2F;index.html">
+<meta property="og:title" content="如何处理非平衡数据">
+<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;2019&#x2F;12&#x2F;26&#x2F;%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%95%B0%E6%8D%AE&#x2F;index.html">
 <meta property="og:site_name" content="junjianli">
-<meta property="og:description" content="Abstract目前大多数非监督的特征学习的数据集一般都是小且经过精挑细选的,比如说ImageNet,因为评估transfer task的时候使用non-curated的原数据会降低特征的质量.这篇文章的目的就是去研究在non-curated的数据下的非监督学习的方式.针对这一问题，提出了一种新的无监督方法，即利用自监督和聚类的方法来获取大规模数据中的complementary statistic">
+<meta property="og:description" content="背景 数据和特征决定了机器学习的上限，模型和算法只是不断逼近这个上限。 不平衡程度相同（即正负样本比例类似）的两个问题，解决的难易程度也可能不同，因为问题难易程度还取决于我们所拥有数据有多大。比如在预测微博互动数的问题中，虽然数据不平衡，但每个档位的数据量都很大——最少的类别也有几万个样本，这样的问题通常比较容易解决；而在癌症诊断的场景中，因为患癌症的人本来就很少，所以数据不但不平衡，样本数还非常">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191120162850263.png?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwMTI5MDA5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191120182614289.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191121095908189.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191121101309986.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191121111309128.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191121155607304.png?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwMTI5MDA5,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191121140826517.png">
-<meta property="article:published_time" content="2019-12-17T00:59:40.000Z">
-<meta property="article:modified_time" content="2019-12-19T01:34:36.159Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;under_over.png">
+<meta property="article:published_time" content="2019-12-26T02:18:08.000Z">
+<meta property="article:modified_time" content="2019-12-26T08:26:24.261Z">
 <meta property="article:author" content="junjian">
-<meta property="article:tag" content="非监督学习">
-<meta property="article:tag" content="深度聚类">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="非平衡数据">
+<meta property="article:tag" content="数据预处理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191120162850263.png?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwMTI5MDA5,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;under_over.png">
   
     <link rel="alternative" href="/atom.xml" title="junjianli" type="application/atom+xml">
   
@@ -194,41 +189,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data论文研读" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何处理非平衡数据" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Unsupervised Pre-Training of Image Features on Non-Curated Data论文研读
+      如何处理非平衡数据
     </h1>
   
 
         
-        <a href="/2019/12/17/Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/" class="archive-article-date">
-  	<time datetime="2019-12-17T00:59:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
+        <a href="/2019/12/26/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%95%B0%E6%8D%AE/" class="archive-article-date">
+  	<time datetime="2019-12-26T02:18:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>目前大多数非监督的特征学习的数据集一般都是小且经过精挑细选的,比如说ImageNet,因为评估transfer task的时候使用non-curated的原数据会降低特征的质量.<br>这篇文章的目的就是去研究在non-curated的数据下的非监督学习的方式.针对这一问题，提出了一种新的无监督方法，即利用自监督和聚类的方法来获取大规模数据中的complementary statistics。我们对来自YFCC100M的9600万张图像进行了验证.在无监督的基准测试方法中取得state of art的效果.<br>我们还证明，用我们的方法训练一个监督的VGG-16(使用deepercluster得到的卷积层的权重进行对网络进行初始化)，在imagenet的验证集上达到了74.9%的top-1的分类精度，比从头开始训练的网络(vgg-16)提高了+0.8%。<br><a id="more"></a>MM</p>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><p>获得大量标注的图像很困难,所以无监督学习的方法就很重要了.<br>最近的一些工作都展示了无监督学习的方式的效果和有监督的的方式越来越靠近了.然而,他们都是训练在ImageNet上面的,而训练的方式就是简单的刨除了标签,但是它仅仅还是移除了人类的监督(标签),但是ImageNet里面的数据还是经过精挑细选的,并且里面的类别都是balance的,所有这篇文章主要是在没有经过这样处理的YFCC100M的数据集上做的,这个数据集里面包括了9900万的没有标注且不是精挑细选的从Flickr这个图像分享网站上面的图像.这个数据集是unbalanced的,类别数呈现”<strong>long-tail”分布</strong>(这正是和ImageNet相反的地方),比如guenon这个类别和baseball这个类别在ImageNet上面都是1300张,但是在YFCC100M里面,一个是226张,一个是256758张,非常的unbalanced.<br>我们提出了一种新的无监督方法，专门用来利用大量的原始数据,事实上，关于大规模的non-curated数据的训练需要(一)模型的复杂性随数据集的大小而增加;(二)模型对数据分布变化的稳定性。一个简单而有效的解决方案是将无监督学习的两个领域的方法结合起来:聚类和自监督学习.<br>由于聚类方法，如深度聚类，是从图像间(inter-image)的相似性来建立监督，所以当图像数量增加时，手头的任务就变得更加复杂。此外，当聚类的数量随数据集的大小变化时，DeepCluster可以捕捉到图像之间更细微的关系。聚类方法在推断目标标签的同时,特征也在被学习。因此，目标标签在训练过程演变，所有使得基于聚类的方法不稳定。(大概意思就是每训练一次就聚类一次,每次学习到的特征都在变,让再将特征聚类,所有基于聚类的方法不是很稳定).此外，这些方法直接依赖底层数据的簇结构，因此对数据分布非常敏感(比如上面提到的long-tail)。假设我们知道潜在类的分布,显式地处理不平衡的类别分配可能是一个解决方案.但是我们这个方法是不知道潜在类的分布的.另一方面，自监督学习是通过从输入信号中自动提取预测伪标签来设计一个pretext task.换句话说，自我监督的方法，如RotNet，利用图像内部(intra-image)的统计信息来建立监督，这通常与数据分布无关。然而，数据集的大小对任务的性质和结果特征的性能几乎没有影响.利用较大数据集的解决方案需要手动增加自我监督任务的难度.我们的方法通过聚类策略自动地增加复杂性。<br><img src="https://img-blog.csdnimg.cn/20191120162850263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwMTI5MDA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>(简单的介绍一下这个表:RotNet是利用图像内部(intra-image)的统计信息来建立监督，这通常与数据分布无关。所有对于long-tail类型的数据可能效果比较好,而deepcluster是利用图像之间的统计信息来建立监督,对long-tail类型可能效果并不是特别好,.所以作者结合deepcluster和rotnet提出来deepercluster这一个模型.)</p>
-<p>DeeperCluster，在自我监督的约束下，通过对整个数据集的特征进行聚类，自动生成目标。由于原始数据的long-tail分布，处理大数据集和学习大量的标签是必要的，使得问题从计算的角度具有挑战性。对于这一个问题,作者提出了层次公式去适应分布式训练.这种方式能够去探索发现在tail部分潜在的种类.(可以去了解一下什么是long-tail效应).虽然我们的框架是通用的，但在实践中我们侧重于将Gidaris(rotnet)等人[15]的旋转监督分类任务与Caron(deepcluster)等人[6]的聚类方法相结合。图1所示，当我们增加训练图像的数量时，特征的质量会提高并超过那些在curated数据集上没有标签的训练图像的质量。</p>
-<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2.Related Work"></a>2.Related Work</h2><p><strong>Self-supervision</strong><br>自监督学习从输入信号中建立一个pretext task来训练一个不带标注的模型。现在提出了很多pretext task，其中包括利用空间上下文、跨通道预测或视频的时间结构。一些pretext task明确地鼓励表示对特定类型的输入转换是不变的或有区别的。例如，Dosovitskiy等人的认为每个图像及其转换是一个类，以强制数据转换的不变性。在这篇论文中，作者建立在Gidaris(rotnet)等人的工作上，他们的模型鼓励特征对于图像的旋转是有区别的。最近，Kolesnikov等人在不同的卷积网络架构产生了了一个广泛的自监督学习方法的benchmark。与我们的工作相反，他们使用curated数据集进行预培训。<br><strong>Deep clustering</strong><br>聚类、密度估计和降维是无监督学习方法的一家子。人们曾尝试使用聚类来训练convnets。我们的论文以Caron(deepcluster)等人的工作为基础，其中k-means被用来聚类视觉表示。与我们的工作不同，他们主要专注于使用没有标签的ImageNet来训练他们的方法。最近，Noroozi等人的表明，聚类也可以作为一种distillation(蒸馏)的形式来提高自我监督训练的网络的性能。与我们的工作相反，他们只是把聚类作为一个后处理步骤，并没有利用聚类和自我监督之间的互补性来进一步提高特性的质量.<br><strong>Learning on non-curated datasets</strong><br>一些方法旨在从non-curated的数据流中学习视觉特征。它们通常使用诸如散列标记或地理定位之类的元数据作为嘈杂的支持。特别是Mahajan等人，训练了一个网络，将数十亿的Instagram图片分类为预定义的干净的标签集。它们表明，在几乎不需要人为干预的情况下，学习一些能够很好地传递给大脑的功能是可能的，如果fine-tuned得好，能达到最先进的性能(SOTA)。与我们的工作相反，他们使用一个必须清理的外部监督来源.</p>
-<h2 id="3-Preliminaries"><a href="#3-Preliminaries" class="headerlink" title="3. Preliminaries"></a>3. Preliminaries</h2><p>在自监督学习中，使用pretext task直接从数据中提取目标标签。这些标签可以采取多种形式。它们可以被归类为与一个多类问题相关的类别标签,比如预测旋转的角度.<br>假设我们有一组n个图像{x<sub>1</sub>，…,x<sub>N</sub>}我们为每个输入分配一个pseudo-labels(伪标签)。鉴于这些pseudo-labels,我们学习的参数θ(卷积层的参数)会同线性分类器V预测pseudo-labels解决这个问题:<br><img src="https://img-blog.csdnimg.cn/20191120182614289.png" alt="在这里插入图片描述"><br>yn是聚类生成的伪标签,fθ(xn)是卷积层提取出来的特征,经过分类器V之后得到预测的标签,将聚类的伪标签yn作为真实标签,去优化θ和V.在优化过程中，伪标签是固定的，学习过程的质量完全取决于它们的相关性.<br><strong>Rotation as self-supervision</strong><br>Gidaris等人最近的研究表明，当训练一个卷积神经网络来区分不同的图像的旋转角度(0,90,180,270)时，可以获得良好的特征。我们借鉴了他的pretext task:RotNet,这个网络在自我监督学习这一块表现的很好,这个pretext task与一个多分类相连:分为0,90,180,270这四类.每一个在公式1中的输入xn都被随机旋转,并且与标签y<sub>n</sub>相关联,y<sub>n</sub>代表着旋转的角度.<br><strong>Deep clustering</strong><br>基于聚类的深层网络方法通常通过对convnets生成的可视化特征进行聚类来构建目标类(target classes)。因此，在训练过程中，标签会随着特征表示的变化而更新，并且在每个时代可能会有所不同.在这种情况下，我们定义了一个潜在的伪标签z<sub>n</sub>在Z的每个图像n以及相应的线性分类器W.这些clustering-based方法交替学习参数θ和W 和更新伪标签z<sub>n</sub>,在两次重新分配之间，固定伪标签zn，通过优化参数θ和分类器W,去解决:<br><img src="https://img-blog.csdnimg.cn/20191121095908189.png" alt="在这里插入图片描述"><br>与式(1)的形式相同，通过最小化辅助损失函数，可以重新分配伪标签z<sub>n</sub>。这种损失有时与Eq.(2)一致，但也有一些工作提出了另一的objective.<br><strong>Updating the targets with k-means</strong><br>在这项工作中，我们重点研究了Caron(deepcluster)等人提出的深度聚类的框架，其中利用k-means对活动进行聚类来获得潜在标签。更准确地说，通过求解以下优化问题，实现了目标z<sub>n</sub>的更新:<br><img src="https://img-blog.csdnimg.cn/20191121101309986.png" alt="在这里插入图片描述"><br>C是一个矩阵，其中每一列对应一个聚类中心, k是聚类中心的数目，z<sub>n</sub>是一个只有一个非零项的二元向量(里面只有一个1,其实全是0,为1的位置的索引就是预测的标签类别)。该方法假设簇k的数量是先验已知的;在实践中，我们通过对下游任务(dowmstream task)的验证来设置它。当目标最小化(2)时，潜在标签在随机梯度下降T个epoch之后再进行更新(2)。(聚类标签每T个epoch之后才更新一次)</p>
-<h2 id="4-Method"><a href="#4-Method" class="headerlink" title="4.Method"></a>4.Method</h2><p>在这一节中，我们将描述如何将自监督学习与深度聚类相结合，以扩展到大数据集图像和标签。<br><strong>4.1. Combining self-supervision and clustering</strong><br>我们假设输入x<sub>1</sub>，…， x<sub>n</sub>为被旋转的图像，每个图像与一个编码其旋转角度的目标标签y<sub>n</sub>和一个赋值为z<sub>n</sub>的簇相关.在训练过程中，随着视觉表示(特征)的变化，聚类产生的标签也发生了变化.我们用<strong>Y表示可能的旋转角度集合</strong>，用<strong>Z表示可能的簇分配集合</strong>。将自监督与深度聚类相结合的一种方法是将Eq.(1)和Eq.(2)中定义的损失相加。然而，把这些损失加在一起假定旋转和聚类关系是两个独立的任务，这可能会限制可以捕获的信号.相反，我们使用笛卡尔积空间Y×Z，它可以捕获两个任务之间更丰富的交互。我们得到如下优化问题:<br><img src="https://img-blog.csdnimg.cn/20191121111309128.png" alt="在这里插入图片描述"><br>请注意，任何聚类或自监督方法(多目标分类)都可以与这个公式相结合。例如，我们可以使用一个自我监督任务来捕获有关图像块排列、或视频帧排序的信息.但是，这一公式在combined target的数目上不具规模.其复杂度为O(|Y||Z|),这限制了使用大数目的聚类或具有大输出空间的自监督任务.特别是，<strong>如果我们想要捕获包含在non-curated数据集tail分布部分的信息，我们可能需要大量聚类数目</strong>。因此，<strong>我们提出了一个基于scalable的分级损失的方案</strong>，<strong>它是为适应分布式训练而设计的</strong>.</p>
-<h3 id="4-2-Scaling-up-to-large-number-of-targets-Hierarchical"><a href="#4-2-Scaling-up-to-large-number-of-targets-Hierarchical" class="headerlink" title="4.2. Scaling up to large number of targets Hierarchical"></a>4.2. Scaling up to large number of targets Hierarchical</h3><p>层次结构损失通常用于语言建模，其目标是从一个大的词汇表中预测一个单词。这些方法不是在完整的词汇表上做出一个decision，而是将这个过程划分为一个层次的decision,每一个包含一个更小的输出空间(split the process in a hierarchy of decisions, each with a smaller output space)。例如，词汇表可以被分成语义相似的词的簇，层次过程将首先观察一个簇，然后在这个簇中观察一个词。<br><img src="https://img-blog.csdnimg.cn/20191121155607304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMwMTI5MDA5,size_16,color_FFFFFF,t_70" alt="horizontal flip"><br>按照这一流程，我们将目标标签划分为一个2级层次结构，在这个层次结构中，我们首先预测(predict,这里应该是predict吗?)一个超类(super-class)，然后在其关联的目标标签中预测一个子类。第一个层次是将图像划分为S个超类(super-class)，<strong>用y<sub>n</sub>表示图像n的{0,1}^S^中的超类赋值向量，用y<sub>n</sub>表示y<sub>n</sub>的第s项</strong>.这个超类的分配是在top-feature上用一个线性分类器V来完成的。层次结构的第二级是通过对每个超类(super-class)内部的划分来实现的。<strong>我们用属于超类s的图像n,用z<sub>n</sub>^s^向量表示在{0,1}^Ks^的赋值表示k<sub>n</sub>的子类</strong>(意思就是讲s个超类分成K个子类,这样每一个样本就有两个标签:S大类的标签和K小类的标签).有S个子类分类器W<sub>1</sub>，…，W<sub>s</sub>.每一个都预测相对应的超类s中的子类成员。线性分类器的参数(V,W<sub>1</sub>，…,W<sub>1</sub>)和θ是通过最小化损失函数共同学习的,损失函数如下:<br><img src="https://img-blog.csdnimg.cn/20191121140826517.png" alt="在这里插入图片描述"><br>注意，不属于超类s的图像也不属于这个超类的的k<sub>s</sub>子类.</p>
-<h3 id="Choice-of-super-classes"><a href="#Choice-of-super-classes" class="headerlink" title="Choice of super-classes."></a>Choice of super-classes.</h3><p>一种自然的划分方法是根据自监督任务的目标标签来定义超类，并根据聚类生成的标签来定义子类。然而，这将意味着整个数据集的每个图像都将出现在每个超类中(具有不同的旋转)，这样就不会利用层次结构的优点来使用更多的clusters.<br>相反，我们通过每隔T个周期在完整数据集上运行m个聚类中心的k-means来将数据集分割成m个集合。然后我们使用分配给这些m个簇和角度旋转类之间的笛卡尔积来形成超类。有4m个超类，每个超类由属于相应集群的数据子集组成(如果集群完全平衡，则为N/m个图像)。然后用k-means将这些子集进一步划分为k个子类。这相当于在完整的数据集上运行一个具有旋转约束的层次k均值聚类来形成我们的层次损失.我们通常使用m = 4和k = 80k，所有总共有320k个不同的集群被分成4个子集。我们的方法“DeeperCluster”与DeepCluster有相似之处，但deepercluster是设计用于扩展到更大的数据集。我们在对非旋转图像特征进行聚类和<strong>训练网络预测输入数据的旋转</strong>和与此旋转对应的聚类之间的集群分配之间进行了改变(这里不知道咋翻译的)</p>
-<h3 id="Distributed-training"><a href="#Distributed-training" class="headerlink" title="Distributed training"></a>Distributed training</h3><p>构建基于数据分割的超类有助于实现在图像数量上良好扩展的分布式实现。具体地说，在优化式(5)时，我们在p个gpu形成的的分布式communication groups,其数目和超类的数目相同，即G = 4m。不同的communication group共享参数θ和超类分类器V,而子类的的参数分类器W<sub>1</sub>,…..,W<sub>S</sub>仅在communication group内共享。每个communication group只处理图像的子集和与超类s相关的旋转角度。</p>
-<h3 id="Distributed-k-means"><a href="#Distributed-k-means" class="headerlink" title="Distributed k-means"></a>Distributed k-means</h3><p>每隔T个epoch，我们通过在整个数据集上运行两次连续的k-means来重新计算超类和子类的赋值。这是通过在不同的gpu之间随机分割数据集来实现的。每个GPU负责计算其分得的聚类分配，而聚类中心则在GPU之间进行更新。我们通过只sharing每个集群分配的元素数量及其特性的总数来减少gpu之间的通信.然后根据这些统计数据计算新的聚类中心.我们从经验上观察到k-均值在10次迭代中趋于收敛。我们使用64个gpu(每次迭代1分钟)将维度为4096的9千6百万个特征聚类成m = 4个簇。然后，我们将这个gpu池分成4组，每组16个gpu。每个组将23M的特征聚类成80k的聚类中心中(每次迭代4分钟)</p>
-<h3 id="4-3-Implementation-details"><a href="#4-3-Implementation-details" class="headerlink" title="4.3. Implementation details"></a>4.3. Implementation details</h3><p>采用小批量随机梯度下降，使Eq.(5)的损失最小化。每个小批处理包含3072个实例(什么实例???),分布在64个GPU中，所以每个小批处理每个GPU中有48个实例。我们使用了dropout, weight decay, momentum和一个恒定的学习速率0.1。我们每3个时代重新分配一次集群。为了加快训练速度，我们在YFCC100M上训练RotNet的权重来初始化网络.</p>
-<h3 id="总结一下这个method"><a href="#总结一下这个method" class="headerlink" title="总结一下这个method:"></a>总结一下这个method:</h3><p>文章提出了一个基于大规模未处理数据的非监督feature学习方法：DeeperCluster。该方法受self-supervised learning和clustering 两种方法的启发：<br>1.Self-supervised learning。这类方法通过设计一个“辅助任务”来实现。“辅助任务”会在输入数据上加上一个伪标签，然后用一个网络来预测这个伪标签。例如：把输入的图片旋转一个角度，然后预测旋转的角度。（也可以是对图片做一个transformation，然后预测出transformation）<br>3.Clustering。其实就是k-means聚类。通过k-means在图片的feature空间上进行聚类，能给每个图片设置一个类标签，然后可以用一个网络来预测这个类标签。</p>
-<p>这两个方法，相当于用两种不同的方式，”创造“出两种不同类型的类的集合。假设用Self-supervised learning”创造“出来的类的集合是A，Clustering创造出来的类的集合是B，A和B的笛卡尔乘积为C，用C来表示所有图片的类型的集合（每张图片从属的两个不同类型的类，组合成的新类，肯定在C里面）。然后用一个网络来预测图片所属的新类。通过这种方式，只需要用一个网络，就可以预测两个类型，把Self-supervised learning和Clustering结合到了一起。<br>Self-supervised learning采用了判断图片旋转类型的方法（参考《Unsupervised representation learning by predicting image rotations》）。Clustering采用了分级的方式：先把所有图片聚类成m个大类；再通过旋转（总共有4中旋转），把一个大类变成4个大类；最后每个大类内的图片再聚类成n的小类。</p>
-<p>用k-means在图片的feature空间上进行聚类时，由于在训练过程中，模型参数在不断的更新，相当于feature提取器在不断更新，所以图片的feature空间也在不断的更新。算法并不是每次更新模型参数时，都重新用k-means为所有图片重新聚类，而是每经过T个epoch重新聚类一次。</p>
-<p><strong>算法流程如下：</strong><br>1.最终目的是要训练出来一个好的特征提取网络。所以，先要初始化一个未训练的特征提取网络，用来提取图片feature。<br>2.用k-means对所有图片（未旋转）的feature进行聚类（clustering），分成m个大类。（每张未旋转的图片有了一个大类的标签）<br>3.对m个大类进行扩展：用“旋转角度的类型”（4种）和“m个大类“计算笛卡尔乘积，得到4m个新的大类。每张经过旋转的图片，只属于4m个大类里面的一个类型。（每张经过旋转的图片有了一个大类的标签）<br>4.4m个大类的每个类，再分别使用k-means对属于本类中的图片的feature进行聚类，分成k个子类。（每张经过旋转的图片，在一个大类下面，又有了一个子类的标签）<br>5.构建1个大类的分类器（4m个大类），每个大类下面再构造1个子类分类器（4个子类），总共1 + 4m个分类器。所有分类器分成两部分：特征提取网络，分类网络。不同分类器的特征提取网络是共享的，分类网络各不相同。然后用Deeper Clustering loss来训练，训练T个epochs。<br>6.T个epochs后，重新回到第2步。</p>
+        <p>背景</p>
+<p><strong>数据和特征决定了机器学习的上限，模型和算法只是不断逼近这个上限。</strong></p>
+<p>不平衡程度相同（即正负样本比例类似）的两个问题，解决的难易程度也可能不同，因为问题难易程度还取决于我们所拥有数据有多大。比如在预测微博互动数的问题中，虽然数据不平衡，但每个档位的数据量都很大——最少的类别也有几万个样本，这样的问题通常比较容易解决；而在癌症诊断的场景中，因为患癌症的人本来就很少，所以数据不但不平衡，样本数还非常少，这样的问题就非常棘手。综上，可以把问题根据难度从小到大排个序：<strong>大数据+分布均衡&lt;大数据+分布不均衡&lt;小数据+数据均衡&lt;小数据+数据不均衡</strong>.<br><a id="more"></a><br>举个例子，让你从一千张狗的图中找到放进去的一只猫，你看了一遍，由于狗的特征你观察的太多了，所以很难会及时分辨出哪只是猫（请忽略人的先验知识）。</p>
+<p>常规的分类评价指标可能会失效，比如将所有的样本都分类成大类，那么准确率、精确率等都会很高。这种情况下，AUC时最好的评价指标。当你在对一个类别不均衡的数据集进行分类时得到了90%的准确度（Accuracy）。当你进一步分析发现，数据集的90%的样本是属于同一个类，并且分类器将所有的样本都分类为该类。在这种情况下，显然该分类器是无效的。并且这种无效是由于训练集中类别不均衡而导致的。</p>
+<p>下面给出两种解决办法：</p>
+<h1 id="1-数据扩充"><a href="#1-数据扩充" class="headerlink" title="1. 数据扩充"></a>1. 数据扩充</h1><p>数据不平衡，某个类别的数据量太少，那就新增一些呗，简单直接。</p>
+<p>但是，怎么增加？如果是实际项目且能够与数据源直接或方便接触的时候，就可以直接去采集新数据。如果是比赛，那就行不通了，最好的办法就是对数据做有效增强后进行扩充。</p>
+<p>数据增强的手段：</p>
+<ul>
+<li>水平 / 竖直翻转</li>
+<li>90°，180°，270° 旋转</li>
+<li>翻转 + 旋转</li>
+<li>亮度，饱和度，对比度的随机变化</li>
+<li>随机裁剪（Random Crop）</li>
+<li>随机缩放（Random Resize）</li>
+<li>加模糊（Blurring）</li>
+<li>加高斯噪声（Gaussian Noise）<br>以上是在实际过程中常用一些增强手段，但是除了前三种以外，其他的要慎重考虑。因为不同的任务场景下数据特征依赖不同，比如高斯噪声，在天池铝材缺陷检测竞赛中，如果高斯噪声增加不当，有些图片原本在采集的时候相机就对焦不准，导致工件难以看清，倘若再增加高斯模糊属性，基本就废了。</li>
+</ul>
+<p><strong>Image类有resize()、rotate()旋转角度和transpose()转换图像方法进行几何变换。FLIP_LEFT_RIGHT=左右互换,FLIP_TOP_BOTTOM=上下互换,ROTATE_90=顺时针旋转</strong><br>附上做旋转的代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageEnhance</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment">#原图</span></span><br><span class="line">raw_image = Image.open(<span class="string">"./raw_images/amazon.jpg"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#旋转90°倍数</span></span><br><span class="line">rotate_90 = raw_image.rotate(<span class="number">90</span>)</span><br><span class="line">rotate_180 = raw_image.rotate(<span class="number">180</span>)</span><br><span class="line">rotate_270 = raw_image.rotate(<span class="number">270</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#旋转结合翻转</span></span><br><span class="line">flip_vertical_raw = raw_image.transpose(Image.FLIP_TOP_BOTTOM)<span class="comment">#原始图像 flip_top_bottom上下翻转</span></span><br><span class="line">flip_vertical_90 = rotate_90.transpose(Image.FLIP_TOP_BOTTOM)</span><br><span class="line">flip_vertical_180 = rotate_180.transpose(Image.FLIP_TOP_BOTTOM)</span><br><span class="line">flip_vertical_270 = rotate_270.transpose(Image.FLIP_TOP_BOTTOM)</span><br><span class="line"></span><br><span class="line"><span class="comment">#存储a.save('保存路径'),将a保存到制定路径</span></span><br><span class="line">flip_vertical_raw.save(<span class="string">"./processed_images/flip_vertical_raw.jpg"</span>)</span><br><span class="line">flip_vertical_90.save(<span class="string">"./processed_images/flip_vertical_90.jpg"</span>)</span><br><span class="line">flip_vertical_180.save(<span class="string">"./processed_images/flip_vertical_180.jpg"</span>)</span><br><span class="line">flip_vertical_270.save(<span class="string">"./processed_images/flip_vertical_270.jpg"</span>)</span><br><span class="line">raw_image.save(<span class="string">"./processed_images/amazon.jpg"</span>)</span><br><span class="line">rotate_90.save(<span class="string">"./processed_images/rotate_90.jpg"</span>)</span><br><span class="line">rotate_180.save(<span class="string">"./processed_images/rotate_180.jpg"</span>)</span><br><span class="line">rotate_270.save(<span class="string">"./processed_images/rotate_270.jpg"</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="2-sampler"><a href="#2-sampler" class="headerlink" title="2. sampler"></a>2. sampler</h1><h2 id="2-1-采样"><a href="#2-1-采样" class="headerlink" title="2.1 采样"></a>2.1 采样</h2><p>如果说类别之间的差距过大，有效的数据增强方式肯定不能弥补这种严重的不平衡，这个时候就需要在模型训练过程中对采样过程进行处理了。<strong>采样方法是通过对训练集进行处理使其从不平衡的数据集变成平衡的数据集，在大部分情况下会对最终的结果带来提升</strong>。常见的采样方式分为两种：上采样和下采样，效果图如下 (图片来源见参考文献 2)：<br>原理就是 “删图片” 和 “增加图片”，从而保证在训练过程中类别之间的数据量大致相同。所带来的影响如下</p>
+<p>上采样：将数据量少的数据复制多份，实际上没有为模型引入更多数据，过分强调数据量少的数据，会放大这部分数据的噪音对模型的影响。</p>
+<p>下采样：丢弃大量数据，和上采样一样会存在过拟合的问题。模型只学到了总体模式的一部分。</p>
+<p>但总的来肯定是利大于弊<br><img src="/asset/under_over.png" alt=""></p>
+<h2 id="2-2-pytorch-权重采样"><a href="#2-2-pytorch-权重采样" class="headerlink" title="2.2 pytorch 权重采样"></a>2.2 pytorch 权重采样</h2><p>pytorch 在 DataLoader () 的时候可以传入 sampler ，这里只说一下加权采样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.utils.data.WightedRandomSampler(weights, num_samples, replacement = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure><br>源码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WeightedRandomSampler</span><span class="params">(Sampler)</span>:</span></span><br><span class="line">    <span class="string">r"""Samples elements from [0,..,len(weights)-1] with given probabilities (weights).</span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        weights (sequence)   : a sequence of weights, not necessary summing up to one</span></span><br><span class="line"><span class="string">        num_samples (int): number of samples to draw</span></span><br><span class="line"><span class="string">        replacement (bool): if ``True``, samples are drawn with replacement.</span></span><br><span class="line"><span class="string">            If not, they are drawn without replacement, which means that when a</span></span><br><span class="line"><span class="string">            sample index is drawn for a row, it cannot be drawn again for that row.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, weights, num_samples, replacement=True)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(num_samples, _int_classes) <span class="keyword">or</span> isinstance(num_samples, bool) <span class="keyword">or</span> \</span><br><span class="line">                num_samples &lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">"num_samples should be a positive integeral "</span></span><br><span class="line">                             <span class="string">"value, but got num_samples=&#123;&#125;"</span>.format(num_samples))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(replacement, bool):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">"replacement should be a boolean value, but got "</span></span><br><span class="line">                             <span class="string">"replacement=&#123;&#125;"</span>.format(replacement))</span><br><span class="line">        self.weights = torch.tensor(weights, dtype=torch.double)</span><br><span class="line">        self.num_samples = num_samples</span><br><span class="line">        self.replacement = replacement</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> iter(torch.multinomial(self.weights, self.num_samples, self.replacement).tolist())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.num_samples</span><br></pre></td></tr></table></figure></p>
+<p>使用方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader,WeightedRandomSampler</span><br><span class="line"><span class="keyword">from</span> dataset <span class="keyword">import</span> train_dataset</span><br><span class="line"></span><br><span class="line">weights = torch.FloatTensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">1</span>])</span><br><span class="line">train_sampler = WeightedRandomSampler(weights,len(train_dataset),replacement=<span class="literal">True</span>)</span><br><span class="line">train_sampler = DataLoader(train_dataset,sampler=sampler)</span><br></pre></td></tr></table></figure><br>解释：</p>
+<ul>
+<li><strong>weights</strong>：指每一个类别在采样过程中得到权重大小（不要求综合为 1），权重越大的样本被选中的概率越大；</li>
+<li><strong>num_samples</strong>: 共选取的样本总数，待选取的样本数目一般小于全部的样本数目；</li>
+<li><strong>replacement</strong> ：指定是否可以重复选取某一个样本，默认为 True，即允许在一个 epoch 中重复采样某一个数据。如果设为 False，则当某一类的样本被全部选取完，但其样本数目仍未达到 num_samples 时，sampler 将不会再从该类中选择数据，此时可能导致 weights 参数失效。</li>
+</ul>
+<h1 id="3-损失函数加权"><a href="#3-损失函数加权" class="headerlink" title="3. 损失函数加权"></a>3. 损失函数加权</h1><p>还有一种方法是在计算损失函数过程中，对每个类别的损失做加权，具体的方式如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">weights = torch.FloatTensor([<span class="number">1</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">4</span>])</span><br><span class="line">criterion = nn.BCEWithLogitsLoss(pos_weight=weights).cuda()</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-尝试其它评价指标-不使用Acc指标"><a href="#4-尝试其它评价指标-不使用Acc指标" class="headerlink" title="4 尝试其它评价指标 (不使用Acc指标)"></a>4 尝试其它评价指标 (不使用Acc指标)</h1><p>从前面的分析可以看出，准确度这个评价指标在类别不均衡的分类任务中并不能work，甚至进行误导（分类器不work，但是从这个指标来看，该分类器有着很好的评价指标得分）。因此在类别不均衡分类任务中，需要使用更有说服力的评价指标来对分类器进行评价。</p>
+<p>推荐了几个比传统的准确度更有效的评价指标：</p>
+<ul>
+<li>混淆矩阵(Confusion Matrix)：使用一个表格对分类器所预测的类别与其真实的类别的样本统计，分别为：TP、FN、FP与TN。</li>
+<li>精确度(Precision)</li>
+<li>召回率(Recall)</li>
+<li>F1得分(F1 Score)：精确度与找召回率的加权平均。</li>
+</ul>
+<p>特别是：</p>
+<ul>
+<li>Kappa (Cohen kappa)</li>
+<li>ROC曲线(ROC Curves</li>
+</ul>
+<h1 id="5-尝试产生人工数据样本"><a href="#5-尝试产生人工数据样本" class="headerlink" title="5 尝试产生人工数据样本"></a>5 尝试产生人工数据样本</h1><p>一种简单的人工样本数据产生的方法便是，对该类下的所有样本每个属性特征的取值空间中随机选取一个组成新的样本，即属性值随机采样。你可以使用基于经验对属性值进行随机采样而构造新的人工样本，或者使用类似朴素贝叶斯方法假设各属性之间互相独立进行采样，这样便可得到更多的数据，但是无法保证属性之前的线性关系（如果本身是存在的）。<br>  有一个系统的构造人工数据样本的方法SMOTE(Synthetic Minority Over-sampling Technique)。SMOTE是一种过采样算法，它构造新的小类样本而不是产生小类中已有的样本的副本，即该算法构造的数据是新样本，原数据集中不存在的。该基于距离度量选择小类别下两个或者更多的相似样本，然后选择其中一个样本，并随机选择一定数量的邻居样本对选择的那个样本的一个属性增加噪声，每次处理一个属性。这样就构造了更多的新生数据。</p>
+<h1 id="6-尝试对模型进行惩罚"><a href="#6-尝试对模型进行惩罚" class="headerlink" title="6 尝试对模型进行惩罚"></a>6 尝试对模型进行惩罚</h1><p>你可以使用相同的分类算法，但是使用一个不同的角度，比如你的分类任务是识别那些小类，那么可以对分类器的小类样本数据增加权值，降低大类样本的权值（这种方法其实是产生了新的数据分布，即产生了新的数据集，译者注），从而使得分类器将重点集中在小类样本身上。一个具体做法就是，在训练分类器时，若分类器将小类样本分错时额外增加分类器一个小类样本分错代价，这个额外的代价可以使得分类器更加“关心”小类样本。如penalized-SVM和penalized-LDA算法。</p>
+<h1 id="7-训练多个弱分类器-对其投票"><a href="#7-训练多个弱分类器-对其投票" class="headerlink" title="7  训练多个弱分类器,对其投票"></a>7  训练多个弱分类器,对其投票</h1><ul>
+<li>设超大类中样本的个数是极小类中样本个数的L倍,将大类中样本划分到L个聚类中，然后训练L个分类器，每个分类器使用大类中的一个簇与所有的小类样本进行训练得到。最后对这L个分类器采取少数服从多数对未知类别数据进行分类，如果是连续值（预测），那么采用平均值。</li>
+<li>可以使用全部的训练集采用多种分类方法分别建立分类器而得到多个分类器，采用投票的方式对未知类别的数据进行分类，如果是连续值（预测），那么采用平均值。</li>
+</ul>
+<h1 id="8-递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。"><a href="#8-递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。" class="headerlink" title="8 递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。"></a>8 递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。</h1><p>一个很好的方法去处理非平衡数据问题，并且在理论上证明了。这个方法便是由Robert E. Schapire于1990年在Machine Learning提出的”The strength of weak learnability” ，该方法是一个boosting算法，它递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。我们可以使用这个算法的第一步去解决数据不平衡问题。<br>  首先使用原始数据集训练第一个学习器L1。<br>  然后使用50%在L1学习正确和50%学习错误的的那些样本训练得到学习器L2，即从L1中学习错误的样本集与学习正确的样本集中，循环一边采样一个。<br>  接着，使用L1与L2不一致的那些样本去训练得到学习器L3。<br>  最后，使用投票方式作为最后输出。<br>  那么如何使用该算法来解决类别不平衡问题呢？<br>  假设是一个二分类问题，大部分的样本都是true类。让L1输出始终为true。使用50%在L1分类正确的与50%分类错误的样本训练得到L2，即从L1中学习错误的样本集与学习正确的样本集中，循环一边采样一个。因此，L2的训练样本是平衡的。L使用L1与L2分类不一致的那些样本训练得到L3，即在L2中分类为false的那些样本。最后，结合这三个分类器，采用投票的方式来决定分类结果，因此只有当L2与L3都分类为false时，最终结果才为false，否则true。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://spytensor.com/index.php/archives/45/" target="_blank" rel="noopener">对非平衡数据进行处理</a><br>[2] <a href="https://blog.csdn.net/u012879957/article/details/82459538" target="_blank" rel="noopener">参考</a></p>
 
       
 
@@ -242,11 +274,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度聚类</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非平衡数据</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">数据预处理</a>
         		</li>
       		
 		</ul>
@@ -302,7 +338,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://106224.github.io/2019/12/17/Unsupervised-Pre-Training-of-Image-Features-on-Non-Curated-Data%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://106224.github.io/2019/12/26/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%95%B0%E6%8D%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +352,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/17/software-engine-homework/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          software engine homework
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</div>
+    <a href="/2019/12/25/PyTorch-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PyTorch 学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -354,7 +381,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">2.</span> <span class="toc-text">1.Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Related-Work"><span class="toc-number">3.</span> <span class="toc-text">2.Related Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Preliminaries"><span class="toc-number">4.</span> <span class="toc-text">3. Preliminaries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Method"><span class="toc-number">5.</span> <span class="toc-text">4.Method</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Scaling-up-to-large-number-of-targets-Hierarchical"><span class="toc-number">5.1.</span> <span class="toc-text">4.2. Scaling up to large number of targets Hierarchical</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Choice-of-super-classes"><span class="toc-number">5.2.</span> <span class="toc-text">Choice of super-classes.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Distributed-training"><span class="toc-number">5.3.</span> <span class="toc-text">Distributed training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Distributed-k-means"><span class="toc-number">5.4.</span> <span class="toc-text">Distributed k-means</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Implementation-details"><span class="toc-number">5.5.</span> <span class="toc-text">4.3. Implementation details</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结一下这个method"><span class="toc-number">5.6.</span> <span class="toc-text">总结一下这个method:</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-数据扩充"><span class="toc-number">1.</span> <span class="toc-text">1. 数据扩充</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-sampler"><span class="toc-number">2.</span> <span class="toc-text">2. sampler</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-采样"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-pytorch-权重采样"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 pytorch 权重采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-损失函数加权"><span class="toc-number">3.</span> <span class="toc-text">3. 损失函数加权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-尝试其它评价指标-不使用Acc指标"><span class="toc-number">4.</span> <span class="toc-text">4 尝试其它评价指标 (不使用Acc指标)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-尝试产生人工数据样本"><span class="toc-number">5.</span> <span class="toc-text">5 尝试产生人工数据样本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-尝试对模型进行惩罚"><span class="toc-number">6.</span> <span class="toc-text">6 尝试对模型进行惩罚</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-训练多个弱分类器-对其投票"><span class="toc-number">7.</span> <span class="toc-text">7  训练多个弱分类器,对其投票</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。"><span class="toc-number">8.</span> <span class="toc-text">8 递归地训练三个弱学习器，然后将这三个弱学习器结合起形成一个强的学习器。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">9.</span> <span class="toc-text">参考文献</span></a></li></ol>
                     </div>
                 </span>
             </div>
