@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https:&#x2F;&#x2F;106224.github.io&#x2F;asset&#x2F;under_over.png">
 <meta property="article:published_time" content="2019-12-26T02:18:08.000Z">
-<meta property="article:modified_time" content="2019-12-29T08:32:56.026Z">
+<meta property="article:modified_time" content="2019-12-29T08:46:17.939Z">
 <meta property="article:author" content="junjian">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="非平衡数据">
@@ -237,7 +237,7 @@
 <ul>
 <li><strong>weights</strong>：指每一个类别在采样过程中得到权重大小（不要求综合为 1），权重越大的样本被选中的概率越大；</li>
 <li><strong>num_samples</strong>: 共选取的样本总数，待选取的样本数目一般小于全部的样本数目；</li>
-<li><strong>replacement</strong> ：指定是否可以重复选取某一个样本，默认为 True，即允许在一个 epoch 中重复采样某一个数据。如果设为 False，则当某一类的样本被全部选取完，但其样本数目仍未达到 num_samples 时，sampler 将不会再从该类中选择数据，此时可能导致 weights 参数失效。<br><a href="https://discuss.pytorch.org/t/some-problems-with-weightedrandomsampler/23242/33" target="_blank" rel="noopener">参考用法</a>:<br>比如说:第一类有568330个样本，第二类有43000个样本，第三类有34900个样本，第四类有20910个样本，第五类有14590个样本，最后一类有9712个样本。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class_sample_counts = [<span class="number">568330.0</span>, <span class="number">43000.0</span>, <span class="number">34900.0</span>, <span class="number">20910.0</span>, <span class="number">14590.0</span>, <span class="number">9712.0</span>]</span><br><span class="line">weights = <span class="number">1.</span> / torch.tensor(class_sample_counts, dtype=torch.float)</span><br><span class="line">samples_weights = weights[train_targets]</span><br><span class="line"></span><br><span class="line">sampler = torch.utils.data.sampler.WeightedRandomSampler(weights=samples_weights,</span><br><span class="line">    num_samples=len(samples_weights),</span><br><span class="line">    replacement=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">loader = torch.utils.data.DataLoader(</span><br><span class="line">dataset=my_dataset,</span><br><span class="line">batch_size=batch_size,</span><br><span class="line">sampler=sampler,</span><br><span class="line">pin_memory=<span class="literal">False</span>,</span><br><span class="line">num_workers=number_workers,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<li><strong>replacement</strong> ：指定是否可以重复选取某一个样本，默认为 True，即允许在一个 epoch 中重复采样某一个数据。如果设为 False，则当某一类的样本被全部选取完，但其样本数目仍未达到 num_samples 时，sampler 将不会再从该类中选择数据，此时可能导致 weights 参数失效。<br>PyTorch Discussion: <a href="https://discuss.pytorch.org/t/some-problems-with-weightedrandomsampler/23242/33" target="_blank" rel="noopener">PyTorch Discussion</a>:<br>比如说:第一类有568330个样本，第二类有43000个样本，第三类有34900个样本，第四类有20910个样本，第五类有14590个样本，最后一类有9712个样本。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class_sample_counts = [<span class="number">568330.0</span>, <span class="number">43000.0</span>, <span class="number">34900.0</span>, <span class="number">20910.0</span>, <span class="number">14590.0</span>, <span class="number">9712.0</span>]</span><br><span class="line">weights = <span class="number">1.</span> / torch.tensor(class_sample_counts, dtype=torch.float)</span><br><span class="line">samples_weights = weights[train_targets]</span><br><span class="line"></span><br><span class="line">sampler = torch.utils.data.sampler.WeightedRandomSampler(weights=samples_weights,</span><br><span class="line">    num_samples=len(samples_weights),</span><br><span class="line">    replacement=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">loader = torch.utils.data.DataLoader(</span><br><span class="line">dataset=my_dataset,</span><br><span class="line">batch_size=batch_size,</span><br><span class="line">sampler=sampler,</span><br><span class="line">pin_memory=<span class="literal">False</span>,</span><br><span class="line">num_workers=number_workers,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 或者:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># np.bincount计算相对应的label的个数,再转换成list</span></span><br><span class="line">classcount = np.bincount(trainset.labels).tolist()</span><br><span class="line"><span class="comment"># 设置权重</span></span><br><span class="line">train_weights = <span class="number">1.</span>/torch.tensor(classcount, dtype=torch.float)</span><br><span class="line">train__sampleweights = train_weights[trainset.labels]</span><br><span class="line"><span class="comment"># 注意,这里的num_samples就是等于train__sampleweights的长度</span></span><br><span class="line">train_sampler = Sampler.WeightedRandomSampler(weights=train__sampleweights, num_samples=len(train__sampleweights))</span><br><span class="line">trainloader = DataLoader(trainset, sampler=train_sampler, shuffle=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="3-损失函数加权"><a href="#3-损失函数加权" class="headerlink" title="3. 损失函数加权"></a>3. 损失函数加权</h1>还有一种方法是在计算损失函数过程中，对每个类别的损失做加权，具体的方式如下<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">weights = torch.FloatTensor([<span class="number">1</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">4</span>])</span><br><span class="line">criterion = nn.BCEWithLogitsLoss(pos_weight=weights).cuda()</span><br></pre></td></tr></table></figure>
 </li>
@@ -538,6 +538,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">非监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">综述</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度聚类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">PyTorch</a>
               </li>
              
@@ -550,26 +566,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">非监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">综述</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度聚类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">非平衡数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">数据预处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">软件工程</a>
               </li>
              
@@ -578,7 +574,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color1">非平衡数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">数据预处理</a>
               </li>
             
             <div class="clearfix"></div>
