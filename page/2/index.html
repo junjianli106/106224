@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://106224.github.io">
-  <title>Tag: PyTorch | junjianli</title>
+  <title>junjianli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="宠辱不惊，闲看庭前花开花落。去留无意，漫随天外云卷云舒。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="junjianli">
-<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;tags&#x2F;Pytorch&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;106224.github.io&#x2F;page&#x2F;2&#x2F;index.html">
 <meta property="og:site_name" content="junjianli">
 <meta property="og:description" content="宠辱不惊，闲看庭前花开花落。去留无意，漫随天外云卷云舒。">
 <meta property="og:locale" content="en_US">
@@ -184,108 +184,90 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/31/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E7%BB%9C%E6%9D%83%E9%87%8D/" class="archive-article-date">
-  	<time datetime="2019-12-31T14:37:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/31/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E7%BB%9C%E6%9D%83%E9%87%8D/">初始化网络权重</a>
+      <a class="article-title" href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/" class="archive-article-date">
+  	<time datetime="2019-12-17T00:18:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>论文地址：<a href="https://arxiv.org/abs/1805.01978" target="_blank" rel="noopener">Unsupervised Feature Learning via Non-Parametric Instance Discrimination</a><br>github代码:<a href="https://github.com/zhirongw/lemniscate.pytorch" target="_blank" rel="noopener">NCE代码</a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h2><p>在有标签数据上训练的神经网络分类器能够很好的捕捉图片间的视觉相似性。文章假设：我们能通过训练基于实例（将每一个样本视为单独的类别）的分类器代替基于类别的分类器，得到可以捕捉视觉相似性的特征表达。我们将其总结为<strong>非参数化实例级判别</strong>，并且通过<strong>噪声对比估计（noise-contrastive estimation）</strong>解决大量实例类别引起的计算困难。<br>我们的实验证明了，在无监督学习的限制下，我们的方法在ImageNet数据集上超越了当前最好方法。采用更多的训练数据和更先进的网络结构，我们的方法能够进一步提高分类准确率。通过微调学习到的特征，我们能观察到与半监督学习和目标检测任务上相当的结果。同时，我们的非参数化模型十分紧致：每张图片仅需要提取128维的特征，百万量级的图片也仅需要600MB存储空间，使得实际运行时能够很快达成近邻检索的目的。<br>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">PyTorch</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">初始化权重</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">非监督学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/17/Unsupervised-Feature-Learning-via-Non-Parametric-Instance-Discrimination/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/27/pytorch-%E5%8A%A8%E6%80%81%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87/" class="archive-article-date">
-  	<time datetime="2019-12-27T08:55:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-27</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/27/pytorch-%E5%8A%A8%E6%80%81%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87/">pytorch 动态调整学习率</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">PyTorch</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
-
-    
 
 
           </div>
@@ -307,10 +289,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: false,
+		isHome: true,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
