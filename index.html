@@ -204,20 +204,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在训练网络的时候,一个好的初始化权重肯定是很重要的,它决定了你后续训练的效果,以及收敛的速度.<br>下面就进入正题:<br>早期的参数初始化方法普遍是将数据和参数normalize为高斯分布（均值0方差1），但随着神经网络深度的增加，这方法并不能解决梯度消失问题。<br><img src="https://upload-images.jianshu.io/upload_images/13575947-39eea5e3a7a83d57.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/500/format/webp" alt="Figure 1: XavierInitialisation.pdf"></p>
-<p>Xavier初始化的作者，Xavier Glorot，在<a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf" target="_blank" rel="noopener">Understanding the difficulty of training deep feedforward neural networks</a>论文中提出一个洞见：激活值的方差是逐层递减的，这导致反向传播中的梯度也逐层递减。要解决梯度消失，就要避免激活值方差的衰减，最理想的情况是，<strong>每层的输出值（激活值）保持高斯分布</strong>。</p>
-<ul>
-<li><p>如果初始化值很小，那么随着层数的传递，方差就会趋于0，此时输入值 也变得越来越小，在sigmoid上就是在0附近，接近于线性，失去了非线性.(sigmoid在0附件的时候,等似于y=x,这时候就接近线性)<br><img src="https://prateekvjoshi.files.wordpress.com/2016/03/2-sigmoid.png" alt=""></p>
-</li>
-<li><p>如果初始值很大，那么随着层数的传递，方差会迅速增加，此时输入值变得很大，而sigmoid在大输入值写倒数趋近于0，反向传播时会遇到梯度消失的问题.</p>
-</li>
-</ul>
-<p>因此，他提出了Xavier初始化：bias初始化为0，为Normalize后的参数乘以一个rescale系数：1/\sqrt n，n是输入参数的个数。</p>
-<p>而Xavier初始化的问题在于，它只适用于线性激活函数，但实际上，对于深层神经网络来说，线性激活函数是没有价值，神经网络需要非线性激活函数来构建复杂的非线性系统。今天的神经网络普遍使用relu激活函数。</p>
-<p>aiming初始化的发明人kaiming he，在Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification论文中提出了针对relu的kaiming初始化。</p>
-<p>因为relu会抛弃掉小于0的值，对于一个均值为0的data来说，这就相当于砍掉了一半的值，这样一来，均值就会变大，前面Xavier初始化公式中E(x)=mean=0的情况就不成立了。根据新公式的推导，最终得到新的rescale系数：2/\sqrt</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_initialize_weights</span><span class="params">(self)</span>:</span></span><br><span class="line">  <span class="comment"># y是0,1，2,3序号，m是AlexNet里面的一个个卷积或者BN层，或者全连接层</span></span><br><span class="line">  <span class="keyword">for</span> y,m <span class="keyword">in</span> enumerate(nn.module()):</span><br><span class="line">    <span class="comment"># 用来判断一个函数是否是一个已知的类型，类似 type()。</span></span><br><span class="line">    <span class="comment"># 如果是卷积的话，(number of filters, kernel size, stride, pad)</span></span><br><span class="line">    <span class="keyword">if</span>  isinstance(m,nn.Conv2d):</span><br><span class="line">      <span class="comment"># W*H*channel,还有一个在卷积层到全连接层的时候的尺寸是:batch_size*W*H*outchannel.n是总的参数的个数</span></span><br><span class="line">      n=m.kernel_size[<span class="number">0</span>]*m.kernel_size[<span class="number">1</span>]*m.outchannels</span><br><span class="line">      <span class="comment">#outchannels是这一层输出的feature map的个数,也就是有outchannels个卷积核,</span></span><br><span class="line">      <span class="comment">#所有遍历这些卷积核进行初始化,让其满足高斯正态分布</span></span><br><span class="line">      <span class="keyword">for</span> i <span class="keyword">in</span> range(m.outchannels):</span><br><span class="line">        m.weight.data[i].normal_(<span class="number">0</span>,math.sqrt(<span class="number">2</span>=./n))</span><br><span class="line">      <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        m.bias.data.zero_()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span>  isinstance(m,nn.BatchNorm2d):</span><br><span class="line">      m.weight.data.fill_(<span class="number">1</span>)</span><br><span class="line">      m.bias.data.zero_()</span><br><span class="line">    <span class="comment"># 如果是全连接层的话，将权重设置为均值为0，标准差为0.01的高斯随机数</span></span><br><span class="line">    <span class="keyword">elif</span> isinstance(m,nn.Linear):</span><br><span class="line">      m.weight.data.normal_(<span class="number">0</span>,<span class="number">0.01</span>)</span><br><span class="line">      m.bias.data.zero_()</span><br></pre></td></tr></table></figure>
-
+        <p>在训练网络的时候,一个好的初始化权重肯定是很重要的,它决定了你后续训练的效果,以及收敛的速度.<br>
+        
       
 
       
@@ -1132,15 +1120,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度聚类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">软件工程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">homework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度聚类</a>
               </li>
              
               <li class="article-tag-list-item">
